@@ -9,10 +9,13 @@
 typedef struct Scene
 {
     Model cube;
-    //Model ball;
-    Material material;
-    GLuint texture_id;
+    Model ball;
+    Model cactus;
+    Material map_material;
+    Material ball_material;
+    GLuint map_texture_id;
 } Scene;
+
 
 /**
  * Initialize the scene by loading models.
