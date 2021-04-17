@@ -13,6 +13,12 @@ typedef struct Camera
     vec3 speed;
 } Camera;
 
+
+/**
+ * Is the help menu visible?
+ */
+int is_guide_visible;
+
 /**
  * Is the texture preview visible?
  */
@@ -47,5 +53,16 @@ void set_camera_speed(Camera* camera, double speed);
  * Set the speed of left and right side steps.
  */
 void set_camera_side_speed(Camera* camera, double speed);
+
+/**
+ * Set the speed of lifting up and down motion.
+ */
+void set_camera_vertical_speed(Camera* camera, double speed);
+
+/**
+ * Shows the guide.
+ */
+void show_guide();
+
 
 #endif /* CAMERA_H */

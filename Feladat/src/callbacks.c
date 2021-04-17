@@ -18,6 +18,10 @@ void display()
     draw_scene(&scene);
     glPopMatrix();
 
+    if (is_guide_visible) {
+        show_guide();
+    }
+
     if (is_preview_visible) {
         show_texture_preview();
     }
@@ -87,6 +91,20 @@ void keyboard(unsigned char key, int x, int y)
             is_preview_visible = TRUE;
         }
         break;
+    case 'q':
+        set_camera_vertical_speed(&camera, 1);
+        break;
+    case 'e':
+        set_camera_vertical_speed(&camera, -1);
+        break;
+    case '-':
+        if(lighting_changer > 0)
+        set_lighting_changer(-0.2);
+        break;
+    case '+':
+        if(lighting_changer < 1)
+        set_lighting_changer(0.2);
+        break;
     }
 
     glutPostRedisplay();
@@ -103,10 +121,33 @@ void keyboard_up(unsigned char key, int x, int y)
     case 'd':
         set_camera_side_speed(&camera, 0.0);
         break;
+    case 'q':
+    case 'e':
+        set_camera_vertical_speed(&camera, 0.0);
+        break;
+    case '+':
+    case '-':
+        set_lighting_changer(0.0);
+        break;
     }
 
     glutPostRedisplay();
 }
+
+void special_function(unsigned char key, int x, int y)
+{
+    switch (key) {
+        case GLUT_KEY_F1:
+            if(is_guide_visible){
+                is_guide_visible = FALSE;
+            }
+            else{
+                is_guide_visible = TRUE;
+            }
+            break;
+    }
+}
+
 
 void idle()
 {

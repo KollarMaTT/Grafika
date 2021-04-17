@@ -8,11 +8,15 @@
 
 void init_scene(Scene* scene)
 {
-    load_model(&(scene->cube), "cube.obj");
-    scene->map_texture_id = load_texture("fu.png");
-    load_model(&(scene->ball), "ball.obj");
-    load_model(&(scene->cactus), "cactus.obj");
+    load_model(&(scene->cube), "objects/cube.obj");
+    load_model(&(scene->ball), "objects/ball.obj");
+    load_model(&(scene->spike), "objects/spike.obj");
+    scene->map_texture_id = load_texture("textures/grass.png");
+    scene->ball_texture_id = load_texture("textures/sb.jpg");
+    scene->guide_id = load_texture("textures/gui.png");
 
+    lighting_changer = 0.41f;
+    
     scene->map_material.ambient.red = 1.0f;
     scene->map_material.ambient.green = 1.0f;
     scene->map_material.ambient.blue = 1.0f;
@@ -27,33 +31,52 @@ void init_scene(Scene* scene)
 
     scene->map_material.shininess = 0;
 
+    scene->ball_material.ambient.red = 1.0f;
+    scene->ball_material.ambient.green = 1.0f;
+    scene->ball_material.ambient.blue = 1.0f;
 
-    scene->ball_material.ambient.red = 0.329412f;
-    scene->ball_material.ambient.green = 0.223529f;
-    scene->ball_material.ambient.blue = 0.027451f;
+    scene->ball_material.diffuse.red = 1.0f;
+    scene->ball_material.diffuse.green = 1.0f;
+    scene->ball_material.diffuse.blue = 1.0f;
 
-    scene->ball_material.diffuse.red = 0.780392f;
-    scene->ball_material.diffuse.green = 0.568627f;
-    scene->ball_material.diffuse.blue = 0.113725f;
+    scene->ball_material.specular.red = 1.0f;
+    scene->ball_material.specular.green = 1.0f;
+    scene->ball_material.specular.blue = 1.0f;
 
-    scene->ball_material.specular.red = 0.992157f;
-    scene->ball_material.specular.green = 0.941176f;
-    scene->ball_material.specular.blue = 0.807843f;
+    scene->ball_material.shininess = 100.0f;
 
-    scene->ball_material.shininess = 27.8974f;
+    scene->spike_material.ambient.red = 1.0f;
+    scene->spike_material.ambient.green = 0.0f;
+    scene->spike_material.ambient.blue = 0.0f;
+
+    scene->spike_material.diffuse.red = 1.0f;
+    scene->spike_material.diffuse.green = 0.0f;
+    scene->spike_material.diffuse.blue = 0.0f;
+
+    scene->spike_material.specular.red = 1.0f;
+    scene->spike_material.specular.green = 0.0f;
+    scene->spike_material.specular.blue = 0.0f;
+
+    scene->spike_material.shininess = 76.8f;
+
 }
 
-void set_lighting()
+void set_lighting(float light)
 {
-    float ambient_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    float diffuse_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    float specular_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float ambient_light[] = { light, light, light, 1.0f };
+    float diffuse_light[] = { light, light, light, 1.0f };
+    float specular_light[] = { light, light, light, 1.0f };
     float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
+}
+
+void set_lighting_changer(float light)
+{
+    lighting_changer += light;
 }
 
 void set_material(const Material* material)
@@ -86,24 +109,24 @@ void set_material(const Material* material)
 void draw_scene(const Scene* scene)
 {
     
-    set_lighting();
+    set_lighting(lighting_changer);
     //draw_origin();
 
     glPushMatrix();
+    set_material(&(scene->spike_material));
+    glTranslatef(0, -2, -0.399999);
+    draw_model(&(scene->spike));
+    glPopMatrix();
+
+    glPushMatrix();
+    glBindTexture(GL_TEXTURE_2D, scene->ball_texture_id);
     set_material(&(scene->ball_material));
-    glScalef(0.5, 0.5, 0.5);
-    //glTranslatef(vec3.x, vec3.y, vec3.z);
+    glTranslatef(0, 0, -0.1);
     draw_model(&(scene->ball));
     glPopMatrix();
 
     set_material(&(scene->map_material));
 
-/*
-    glPushMatrix();
-    glTranslatef(0, 0, -1);
-    draw_model(&(scene->cactus));
-    glPopMatrix();
-*/
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
     glTranslatef(0, 0, -1);
@@ -111,32 +134,27 @@ void draw_scene(const Scene* scene)
     glPopMatrix();
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
     glTranslatef(0, -1, -1);
     draw_model(&(scene->cube));
     glPopMatrix();
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
     glTranslatef(0, -2, -1);
     draw_model(&(scene->cube));
     glPopMatrix();
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
-    glTranslatef(0, -3, 0);
+    glTranslatef(0, -3, -1);
+    draw_model(&(scene->cube));
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(0, -4, -1);
     draw_model(&(scene->cube));
     glPopMatrix();
 
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
-    glTranslatef(0, -4, 0);
-    draw_model(&(scene->cube));
-    glPopMatrix();
-
-    glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, scene->map_texture_id);
-    glTranslatef(0, -6, 0);
+    glTranslatef(0, -6, -1);
     draw_model(&(scene->cube));
     glPopMatrix();
 

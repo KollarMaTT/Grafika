@@ -16,6 +16,7 @@ void init_camera(Camera* camera)
     camera->speed.y = 0;
     camera->speed.z = 0;
 
+    is_guide_visible = TRUE;
     is_preview_visible = FALSE;
 }
 
@@ -31,6 +32,8 @@ void update_camera(Camera* camera, double time)
     camera->position.y += sin(angle) * camera->speed.y * time;
     camera->position.x += cos(side_angle) * camera->speed.x * time;
     camera->position.y += sin(side_angle) * camera->speed.x * time;
+    
+    camera->position.z += camera->speed.z * time;
 }
 
 void set_view(const Camera* camera)
@@ -74,6 +77,40 @@ void set_camera_side_speed(Camera* camera, double speed)
 {
     camera->speed.x = speed;
 }
+
+void set_camera_vertical_speed(Camera* camera, double speed)
+{
+    camera->speed.z = speed;
+}
+
+void show_guide()
+{
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_COLOR_MATERIAL);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+	glBindTexture(GL_TEXTURE_2D, 3);
+    glColor3f(1, 1, 1);
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(-1.9, 1.4, -3);
+    glTexCoord2f(1, 0);
+    glVertex3f(1.9, 1.4, -3);
+    glTexCoord2f(1, 1);
+    glVertex3f(1.9, -1.4, -3);
+    glTexCoord2f(0, 1);
+    glVertex3f(-1.9, -1.4, -3);
+    glEnd();
+
+    glDisable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_DEPTH_TEST);
+}
+
 
 void show_texture_preview()
 {

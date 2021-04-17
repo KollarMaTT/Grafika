@@ -16,6 +16,7 @@ void set_callbacks()
     glutMotionFunc(motion);
     glutKeyboardFunc(keyboard);
     glutKeyboardUpFunc(keyboard_up);
+    glutSpecialFunc(special_function);
     glutIdleFunc(idle);
 }
 
@@ -31,7 +32,7 @@ int main(int argc, char* argv[])
     glutInitWindowSize(640, 480);     
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
-    window = glutCreateWindow("Blue ball");
+    window = glutCreateWindow("Soccer ball game");
     glutSetWindow(window);
 
     init_opengl();

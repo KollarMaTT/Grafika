@@ -10,12 +10,19 @@ typedef struct Scene
 {
     Model cube;
     Model ball;
-    Model cactus;
+    Model spike;
     Material map_material;
     Material ball_material;
+    Material spike_material;
     GLuint map_texture_id;
+    GLuint ball_texture_id;
+    GLuint guide_id;
 } Scene;
 
+/**
+ * Measure of light changing.
+ */
+float lighting_changer;
 
 /**
  * Initialize the scene by loading models.
@@ -23,9 +30,14 @@ typedef struct Scene
 void init_scene(Scene* scene);
 
 /**
+ * Change the lighting of the scene.
+ */
+void set_lighting(float light);
+
+/**
  * Set the lighting of the scene.
  */
-void set_lighting();
+void set_lighting_changer(float light);
 
 /**
  * Set the current material.
