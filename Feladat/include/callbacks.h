@@ -3,6 +3,7 @@
 
 #include "camera.h"
 #include "scene.h"
+#include "spike.h"
 
 #include <GL/glut.h>
 
@@ -15,6 +16,11 @@ Scene scene;
  * Camera
  */
 Camera camera;
+
+/**
+ * Spike
+ */
+Spike spike;
 
 /**
  * Call when need to display the graphical content.

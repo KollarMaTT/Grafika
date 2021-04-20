@@ -15,7 +15,7 @@ void display()
 
     glPushMatrix();
     set_view(&camera);
-    draw_scene(&scene);
+    draw_scene(&scene, &spike);
     glPopMatrix();
 
     if (is_guide_visible) {

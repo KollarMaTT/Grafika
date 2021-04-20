@@ -10,7 +10,7 @@ void init_scene(Scene* scene)
 {
     load_model(&(scene->cube), "objects/cube.obj");
     load_model(&(scene->ball), "objects/ball.obj");
-    load_model(&(scene->spike), "objects/spike.obj");
+    //load_model(&(scene->spike), "objects/spike.obj");
     scene->map_texture_id = load_texture("textures/grass.png");
     scene->ball_texture_id = load_texture("textures/sb.jpg");
     scene->guide_id = load_texture("textures/gui.png");
@@ -59,6 +59,8 @@ void init_scene(Scene* scene)
 
     scene->spike_material.shininess = 76.8f;
 
+    init_spike(&spike);
+
 }
 
 void set_lighting(float light)
@@ -106,17 +108,22 @@ void set_material(const Material* material)
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &(material->shininess));
 }
 
-void draw_scene(const Scene* scene)
+void draw_scene(const Scene* scene, Spike* spike)
 {
     
     set_lighting(lighting_changer);
     //draw_origin();
 
+    set_material(&(scene->spike_material));
+    draw_spike(spike);
+
+    /*
     glPushMatrix();
     set_material(&(scene->spike_material));
     glTranslatef(0, -2, -0.399999);
     draw_model(&(scene->spike));
     glPopMatrix();
+    */
 
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, scene->ball_texture_id);
@@ -178,3 +185,15 @@ void draw_origin()
 
     glEnd();
 }
+
+/*
+void draw_spike(Spike* spike)
+{
+    glPushMatrix();
+    //set_material(&(scene->spike_material));
+    glTranslatef(0, -2, -0.399999);
+    draw_model(&(scene->spike));
+    glPopMatrix();
+
+}
+*/

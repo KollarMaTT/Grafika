@@ -3,6 +3,7 @@
 
 #include "camera.h"
 #include "texture.h"
+#include "spike.h"
 
 #include <obj/model.h>
 
@@ -10,7 +11,7 @@ typedef struct Scene
 {
     Model cube;
     Model ball;
-    Model spike;
+    //Model spike;
     Material map_material;
     Material ball_material;
     Material spike_material;
@@ -47,11 +48,12 @@ void set_material(const Material* material);
 /**
  * Draw the scene objects.
  */
-void draw_scene(const Scene* scene);
+void draw_scene(const Scene* scene, Spike* spike);
 
 /**
  * Draw the origin of the world coordinate system.
  */
 void draw_origin();
+
 
 #endif /* SCENE_H */
