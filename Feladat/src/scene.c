@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "utils.h"
+#include "spike.h"
 
 #include <GL/glut.h>
 
