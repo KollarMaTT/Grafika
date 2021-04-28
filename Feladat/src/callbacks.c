@@ -91,14 +91,6 @@ void keyboard(unsigned char key, int x, int y)
     case 'd':
         set_camera_side_speed(&camera, -1);
         break;
-    case 't':
-        if (is_preview_visible) {
-            is_preview_visible = FALSE;
-        }
-        else {
-            is_preview_visible = TRUE;
-        }
-        break;
     case 'q':
         set_camera_vertical_speed(&camera, 1);
         break;
@@ -179,14 +171,14 @@ void special_function(unsigned char key, int x, int y)
             }
             break;
         case GLUT_KEY_LEFT:
-            set_camera_speed(&camera, -0.434);
-            set_camera_side_speed(&camera, 2.5);
+            set_camera_speed(&camera, -0.512);
+            set_camera_side_speed(&camera, 2.95);
             set_ball_moving_speed(&(scene.ball), 3);
             set_ball_rotation(&(scene.ball), -240);
             break;
         case GLUT_KEY_RIGHT:
-            set_camera_speed(&camera, 0.434);
-            set_camera_side_speed(&camera, -2.5);
+            set_camera_speed(&camera, 0.512);
+            set_camera_side_speed(&camera, -2.95);
             set_ball_moving_speed(&(scene.ball), -3);
             set_ball_rotation(&(scene.ball), 240);
             break;

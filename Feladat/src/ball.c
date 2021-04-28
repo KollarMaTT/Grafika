@@ -130,7 +130,7 @@ void update_ball(Ball* ball, Spike* spike, Flag* flag)
 
     //Bounding box. (flag)
 
-    float flag_l = flag->position.y - 0.1;
+    float flag_l = flag->position.y - 0.01;
     float flag_h = flag->position.z + 0.2;
 
     if(ball_r <= flag_l && ball_b <= flag_h)
