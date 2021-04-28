@@ -20,6 +20,16 @@ typedef struct Camera
 int is_guide_visible;
 
 /**
+ * Is the game over screen visible?
+ */
+int is_lose_visible;
+
+/**
+ * Is the win screen visible?
+ */
+int is_win_visible;
+
+/**
  * Is the texture preview visible?
  */
 int is_preview_visible;
@@ -33,6 +43,11 @@ void init_camera(Camera* camera);
  * Update the position of the camera.
  */
 void update_camera(Camera* camera, double time);
+
+/**
+ * Reset the position of the camera.
+ */
+void reset_camera(Camera* camera);
 
 /**
  * Apply the camera settings to the view transformation.
@@ -63,6 +78,17 @@ void set_camera_vertical_speed(Camera* camera, double speed);
  * Shows the guide.
  */
 void show_guide();
+
+/**
+ * Shows the game over screen.
+ */
+void show_lose();
+
+/**
+ * Shows the win screen.
+ */
+void show_win();
+
 
 
 #endif /* CAMERA_H */

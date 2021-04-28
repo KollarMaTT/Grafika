@@ -3,7 +3,6 @@
 
 #include "camera.h"
 #include "scene.h"
-#include "spike.h"
 
 #include <GL/glut.h>
 
@@ -16,11 +15,6 @@ Scene scene;
  * Camera
  */
 Camera camera;
-
-/**
- * Spike
- */
-Spike spike;
 
 /**
  * Call when need to display the graphical content.
@@ -56,6 +50,11 @@ void keyboard_up(unsigned char key, int x, int y);
  * Call after special keyboard event.
  */
 void special_function(unsigned char key, int x, int y);
+
+/**
+ * Call after special keyboard release event.
+ */
+void special_function_up(unsigned char key, int x, int y);
 
 /**
  * Call when there is no other event.

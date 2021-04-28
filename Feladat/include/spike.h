@@ -12,15 +12,18 @@
 typedef struct Spike
 {
     Model spike;
-    //Material spike_material;
-    //float spike_x;
-    //float spike_y;
-    //float spike_z;
     vec3 position;
+    Material spike_material;
 } Spike;
 
-void init_spike(Spike* spike);
+/**
+ * Initialize the spike object.
+ */
+void init_spike(Spike* spike, float y);
 
+/**
+ * Draw the spike object.
+ */
 void draw_spike(Spike* spike);
 
 #endif /* SPIKE_H */

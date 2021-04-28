@@ -24,6 +24,7 @@ typedef struct Color
     float blue;
 } Color;
 
+
 /**
  * Material
  */
@@ -34,6 +35,7 @@ typedef struct Material
     struct Color specular; 
     float shininess;
 } Material;
+
 
 /**
  * Calculates radian from degree.

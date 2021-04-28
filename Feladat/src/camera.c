@@ -7,17 +7,19 @@
 
 void init_camera(Camera* camera)
 {
-    camera->position.x = -7;
-    camera->position.y = 5;
-    camera->position.z = 2;
-    camera->rotation.x = 0.0;
+    camera->position.x = -6;
+    camera->position.y = 1.0;
+    camera->position.z = 1.5;
+    camera->rotation.x = -5.0;
     camera->rotation.y = 0.0;
-    camera->rotation.z = -50.0;
+    camera->rotation.z = -10.0;
     camera->speed.x = 0;
     camera->speed.y = 0;
     camera->speed.z = 0;
 
     is_guide_visible = TRUE;
+    is_lose_visible = FALSE;
+    is_win_visible = FALSE;
     is_preview_visible = FALSE;
 }
 
@@ -35,6 +37,21 @@ void update_camera(Camera* camera, double time)
     camera->position.y += sin(side_angle) * camera->speed.x * time;
     
     camera->position.z += camera->speed.z * time;
+
+
+}
+
+void reset_camera(Camera* camera)
+{
+    camera->position.x = -6;
+    camera->position.y = 1.0;
+    camera->position.z = 1.5;
+    camera->rotation.x = -5.0;
+    camera->rotation.y = 0.0;
+    camera->rotation.z = -10.0;
+    camera->speed.x = 0;
+    camera->speed.y = 0;
+    camera->speed.z = 0;
 }
 
 void set_view(const Camera* camera)
@@ -85,6 +102,62 @@ void set_camera_vertical_speed(Camera* camera, double speed)
 }
 
 void show_guide()
+{
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_COLOR_MATERIAL);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+	glBindTexture(GL_TEXTURE_2D, 1);
+    glColor3f(1, 1, 1);
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(-1.9, 1.4, -3);
+    glTexCoord2f(1, 0);
+    glVertex3f(1.9, 1.4, -3);
+    glTexCoord2f(1, 1);
+    glVertex3f(1.9, -1.4, -3);
+    glTexCoord2f(0, 1);
+    glVertex3f(-1.9, -1.4, -3);
+    glEnd();
+
+    glDisable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_DEPTH_TEST);
+}
+
+void show_lose()
+{
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_COLOR_MATERIAL);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+	glBindTexture(GL_TEXTURE_2D, 2);
+    glColor3f(1, 1, 1);
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0, 0);
+    glVertex3f(-1.9, 1.4, -3);
+    glTexCoord2f(1, 0);
+    glVertex3f(1.9, 1.4, -3);
+    glTexCoord2f(1, 1);
+    glVertex3f(1.9, -1.4, -3);
+    glTexCoord2f(0, 1);
+    glVertex3f(-1.9, -1.4, -3);
+    glEnd();
+
+    glDisable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_DEPTH_TEST);
+}
+
+void show_win()
 {
     glDisable(GL_LIGHTING);
     glDisable(GL_DEPTH_TEST);

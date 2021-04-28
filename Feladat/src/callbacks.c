@@ -15,11 +15,19 @@ void display()
 
     glPushMatrix();
     set_view(&camera);
-    draw_scene(&scene, &spike);
+    draw_scene(&scene, &(scene.map), &(scene.spike1), &(scene.spike2), &(scene.ball), &(scene.flag));
     glPopMatrix();
 
     if (is_guide_visible) {
         show_guide();
+    }
+
+    if (is_lose_visible) {
+        show_lose();
+    }
+
+    if (is_win_visible) {
+        show_win();
     }
 
     if (is_preview_visible) {
@@ -105,6 +113,26 @@ void keyboard(unsigned char key, int x, int y)
         if(lighting_changer < 1)
         set_lighting_changer(0.2);
         break;
+    case 'j':
+        set_ball_moving_speed(&(scene.ball), 3);
+        set_ball_rotation(&(scene.ball), -240);
+        break;
+    case 'l':
+        set_ball_moving_speed(&(scene.ball), -3);
+        set_ball_rotation(&(scene.ball), 240);
+        break;
+        case 'i':
+        set_upward_speed(&(scene.ball), 12);
+        break;
+     case 'r':
+        reset_lights();
+        reset_camera(&camera);
+        reset_ball(&(scene.ball));
+        if(is_lose_visible)
+        is_lose_visible = FALSE;
+        if(is_win_visible)
+        is_win_visible = FALSE;
+        break;
     }
 
     glutPostRedisplay();
@@ -129,6 +157,11 @@ void keyboard_up(unsigned char key, int x, int y)
     case '-':
         set_lighting_changer(0.0);
         break;
+    case 'j':
+    case 'l':
+        set_ball_moving_speed(&(scene.ball), 0.0);
+        set_ball_rotation(&(scene.ball), 0.0);
+        break;
     }
 
     glutPostRedisplay();
@@ -145,7 +178,38 @@ void special_function(unsigned char key, int x, int y)
                 is_guide_visible = TRUE;
             }
             break;
+        case GLUT_KEY_LEFT:
+            set_camera_speed(&camera, -0.434);
+            set_camera_side_speed(&camera, 2.5);
+            set_ball_moving_speed(&(scene.ball), 3);
+            set_ball_rotation(&(scene.ball), -240);
+            break;
+        case GLUT_KEY_RIGHT:
+            set_camera_speed(&camera, 0.434);
+            set_camera_side_speed(&camera, -2.5);
+            set_ball_moving_speed(&(scene.ball), -3);
+            set_ball_rotation(&(scene.ball), 240);
+            break;
+        case GLUT_KEY_UP:
+            set_upward_speed(&(scene.ball), 12);
+            break;
     }
+    glutPostRedisplay();
+}
+
+void special_function_up(unsigned char key, int x, int y)
+{
+    switch (key) {
+    case GLUT_KEY_LEFT:
+    case GLUT_KEY_RIGHT:
+        set_camera_speed(&camera, 0.0);
+        set_camera_side_speed(&camera, 0.0);
+        set_ball_moving_speed(&(scene.ball), 0.0);
+        set_ball_rotation(&(scene.ball), 0.0);
+        break;
+    }
+
+    glutPostRedisplay();
 }
 
 
@@ -153,10 +217,10 @@ void idle()
 {
     static int last_frame_time = 0;
     int current_time;
-    double elapsed_time;
+    float elapsed_time;
    
     current_time = glutGet(GLUT_ELAPSED_TIME);
-    elapsed_time = (double)(current_time - last_frame_time) / 1000;
+    elapsed_time = (float)(current_time - last_frame_time) / 1000;
     last_frame_time = current_time;
 
     update_camera(&camera, elapsed_time);
