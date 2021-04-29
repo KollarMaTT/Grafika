@@ -11,7 +11,7 @@
  */
 typedef struct Spike
 {
-    Model spike;
+    Model model;
     vec3 position;
     Material spike_material;
 } Spike;

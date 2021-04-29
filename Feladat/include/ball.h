@@ -14,7 +14,7 @@
  */
 typedef struct Ball
 {
-    Model ball;
+    Model model;
     GLuint ball_texture_id;
     float radius;
     vec3 position;
@@ -63,7 +63,6 @@ void set_ball_rotation(Ball* ball, float angle);
  * Make the ball jump.
  */
 void set_upward_speed(Ball* ball, float jump_power);
-
 
 
 #endif /* BALL_H */

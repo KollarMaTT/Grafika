@@ -9,7 +9,7 @@
 
 void init_map(Map* map)
 {
-    load_model(&(map->map), "objects/cube.obj");
+    load_model(&(map->model), "objects/cube.obj");
     map->map_texture_id = load_texture("textures/grass.png");
     
     map->position.x=0.0;
@@ -37,6 +37,6 @@ void draw_map(Map* map, float y)
     glBindTexture(GL_TEXTURE_2D, map->map_texture_id);
     set_material(&(map->map_material));
     glTranslatef(map->position.x, map->position.y-y, map->position.z);
-    draw_model(&(map->map));
+    draw_model(&(map->model));
     glPopMatrix();
 }

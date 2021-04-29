@@ -72,7 +72,7 @@ void set_material(const Material* material)
 }
 
 
-void draw_scene(const Scene* scene, Map* map, Spike* spike1, Spike* spike2, Ball* ball, Flag* flag)
+void draw_scene(const Scene* scene)
 {
     
     set_lighting(lighting_changer);

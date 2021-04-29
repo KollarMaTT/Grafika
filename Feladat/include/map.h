@@ -11,7 +11,7 @@
  */
 typedef struct Map
 {
-    Model map;
+    Model model;
     GLuint map_texture_id;
     vec3 position;
     Material map_material;

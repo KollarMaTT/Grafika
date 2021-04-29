@@ -14,7 +14,7 @@
 
 void init_ball(Ball* ball)
 {
-    load_model(&(ball->ball), "objects/ball.obj");
+    load_model(&(ball->model), "objects/ball.obj");
     ball->ball_texture_id = load_texture("textures/sb.jpg");
     
     ball->radius = 0.4;
@@ -52,7 +52,7 @@ void draw_ball(Ball* ball)
     set_material(&(ball->ball_material));
     glTranslatef(ball->position.x, ball->position.y, ball->position.z);
     glRotatef(ball->rotation.x, 1, 0, 0);
-    draw_model(&(ball->ball));
+    draw_model(&(ball->model));
     glPopMatrix();
 }
 

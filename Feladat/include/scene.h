@@ -12,18 +12,12 @@
 
 typedef struct Scene
 {
-    //Model cube;
-
     Map map;
     Flag flag;
     Spike spike1;
     Spike spike2;
     Ball ball;
 
-    //Material map_material;
-    //Material flag_material;
-
-    //GLuint map_texture_id;
     GLuint guide_id;
     GLuint lose_id;
     GLuint win_id;
@@ -57,7 +51,7 @@ void set_material(const Material* material);
 /**
  * Draw the scene objects.
  */
-void draw_scene(const Scene* scene, Map* map, Spike* spike1, Spike* spike2, Ball* ball, Flag* flag);
+void draw_scene(const Scene* scene);
 
 /**
  * Reset the brightness of the scene.

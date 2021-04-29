@@ -9,7 +9,7 @@
 
 void init_flag(Flag* flag)
 {
-    load_model(&(flag->flag), "objects/flag.obj");
+    load_model(&(flag->model), "objects/flag.obj");
     
     flag->position.x=0.0;
     flag->position.y=-8.0;
@@ -35,7 +35,7 @@ void draw_flag(Flag* flag)
     glPushMatrix();
     set_material(&(flag->flag_material));
     glTranslatef(flag->position.x, flag->position.y, flag->position.z);
-    draw_model(&(flag->flag));
+    draw_model(&(flag->model));
     glPopMatrix();
 
 }

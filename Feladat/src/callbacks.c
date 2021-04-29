@@ -15,7 +15,7 @@ void display()
 
     glPushMatrix();
     set_view(&camera);
-    draw_scene(&scene, &(scene.map), &(scene.spike1), &(scene.spike2), &(scene.ball), &(scene.flag));
+    draw_scene(&scene);
     glPopMatrix();
 
     if (is_guide_visible) {
@@ -113,7 +113,7 @@ void keyboard(unsigned char key, int x, int y)
         set_ball_moving_speed(&(scene.ball), -3);
         set_ball_rotation(&(scene.ball), 240);
         break;
-        case 'i':
+    case 'i':
         set_upward_speed(&(scene.ball), 12);
         break;
      case 'r':

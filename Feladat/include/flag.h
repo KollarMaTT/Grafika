@@ -11,7 +11,7 @@
  */
 typedef struct Flag
 {
-    Model flag;
+    Model model;
     vec3 position;
     Material flag_material;
 } Flag;

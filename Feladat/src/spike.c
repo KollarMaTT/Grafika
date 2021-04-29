@@ -9,7 +9,7 @@
 
 void init_spike(Spike* spike, float y)
 {
-    load_model(&(spike->spike), "objects/spike.obj");
+    load_model(&(spike->model), "objects/spike.obj");
     
     spike->position.x=0.0;
     spike->position.y=-y;
@@ -35,7 +35,7 @@ void draw_spike(Spike* spike)
     glPushMatrix();
     set_material(&(spike->spike_material));
     glTranslatef(spike->position.x, spike->position.y, spike->position.z);
-    draw_model(&(spike->spike));
+    draw_model(&(spike->model));
     glPopMatrix();
 
 }
