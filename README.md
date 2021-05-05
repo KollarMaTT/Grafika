@@ -9,5 +9,7 @@ Camera movements.
 Light chganger keys.
 Ball movements.
 Both camera and ball movements at the same time.
-Bounding-box.
-
+Bounding-box (field element, spike, cup).
+Bouncing animation.
+Phisics.
+Skybox.
