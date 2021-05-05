@@ -4,19 +4,26 @@
 #include "camera.h"
 #include "texture.h"
 #include "map.h"
+#include "field_element.h"
 #include "spike.h"
 #include "ball.h"
-#include "flag.h"
+#include "cup.h"
+#include "skybox.h"
 
 #include <obj/model.h>
 
 typedef struct Scene
 {
     Map map;
-    Flag flag;
+    Field_element field_element1;
+    Field_element field_element2;
+    Field_element field_element3;
+    Cup cup;
     Spike spike1;
     Spike spike2;
+    Spike spike3;
     Ball ball;
+    Skybox skybox;
 
     GLuint guide_id;
     GLuint lose_id;

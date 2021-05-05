@@ -25,6 +25,6 @@ void init_map(Map* map);
 /**
  * Draw the map.
  */
-void draw_map(Map* map, float y);
+void draw_map(Map* map);
 
 #endif /* MAP_H */

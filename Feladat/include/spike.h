@@ -19,7 +19,7 @@ typedef struct Spike
 /**
  * Initialize the spike object.
  */
-void init_spike(Spike* spike, float y);
+void init_spike(Spike* spike, float y, float z);
 
 /**
  * Draw the spike object.

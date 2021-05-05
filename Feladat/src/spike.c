@@ -7,13 +7,14 @@
 #include <obj/load.h>
 #include <obj/draw.h>
 
-void init_spike(Spike* spike, float y)
+void init_spike(Spike* spike, float y, float z)
 {
     load_model(&(spike->model), "objects/spike.obj");
     
     spike->position.x=0.0;
     spike->position.y=-y;
-    spike->position.z=-0.299;
+    spike->position.z=z;
+    //spike->position.z=-0.299;
 
     spike->spike_material.ambient.red = 0.2745f;
     spike->spike_material.ambient.green = 0.01175f;

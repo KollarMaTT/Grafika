@@ -4,8 +4,10 @@
 #include <utils.h>
 #include <camera.h>
 #include <stdbool.h>
+#include <map.h>
+#include <field_element.h>
 #include <spike.h>
-#include <flag.h>
+#include <cup.h>
 
 #include <obj/model.h>
 
@@ -25,6 +27,7 @@ typedef struct Ball
     float gravity;
     float upward_speed;
     bool is_in_air;
+    float bouncing;
     
     Material ball_material;
 } Ball;
@@ -47,7 +50,7 @@ void reset_ball(Ball* ball);
 /**
  * Update the position of the ball.
  */
-void update_ball(Ball* ball, Spike* spike, Flag* flag);
+void update_ball(Ball* ball, Map* map, Field_element* field_element, Spike* spike, Cup* cup);
 
 /**
  * Move the ball object.

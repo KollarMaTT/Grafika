@@ -2,7 +2,7 @@
 #include "utils.h"
 #include "spike.h"
 #include "ball.h"
-#include "flag.h"
+#include "cup.h"
 
 #include <GL/glut.h>
 
@@ -17,10 +17,15 @@ void init_scene(Scene* scene)
 
     lighting_changer = 0.41f;
 
+    init_skybox(&(scene->skybox));
     init_map(&(scene->map));
-    init_flag(&(scene->flag));
-    init_spike(&(scene->spike1), 2);
-    init_spike(&(scene->spike2), 5);
+    init_field_element(&(scene->field_element1), 4.5, 0.1);
+    init_field_element(&(scene->field_element2), 6.5, 0.1);
+    init_field_element(&(scene->field_element3), 7.5, 0.1);
+    init_cup(&(scene->cup));
+    init_spike(&(scene->spike1), 2, -0.299);
+    init_spike(&(scene->spike2), 5.5, -0.299);
+    init_spike(&(scene->spike3), 7.5, 0.7);
     init_ball(&(scene->ball));
 
 }
@@ -79,20 +84,25 @@ void draw_scene(const Scene* scene)
     glBindTexture(GL_TEXTURE_2D, 0);
     //draw_origin();
 
-    draw_flag(&(scene->flag));
+    draw_cup(&(scene->cup));
 
     draw_spike(&(scene->spike1));
     draw_spike(&(scene->spike2));
+    draw_spike(&(scene->spike3));
 
-    int i;
-    for(i = 0; i < 9; i++){
-    draw_map(&(scene->map), i);
-    }
+    draw_map(&(scene->map));
+
+    draw_field_element(&(scene->field_element1));
+    draw_field_element(&(scene->field_element2));
+    draw_field_element(&(scene->field_element3));
     
     draw_ball(&(scene->ball));
 
-    update_ball(&(scene->ball), &(scene->spike1), &(scene->flag));
-    update_ball(&(scene->ball), &(scene->spike2), &(scene->flag));
+    draw_skybox(&(scene->skybox));
+
+    update_ball(&(scene->ball), &(scene->map), &(scene->field_element1), &(scene->spike1), &(scene->cup));
+    update_ball(&(scene->ball), &(scene->map), &(scene->field_element2), &(scene->spike2), &(scene->cup));
+    update_ball(&(scene->ball), &(scene->map), &(scene->field_element3), &(scene->spike3), &(scene->cup));
 
 }
 

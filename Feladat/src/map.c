@@ -31,12 +31,18 @@ void init_map(Map* map)
     map->map_material.shininess = 0;
 }
 
-void draw_map(Map* map, float y)
+void draw_map(Map* map)
 {
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, map->map_texture_id);
     set_material(&(map->map_material));
-    glTranslatef(map->position.x, map->position.y-y, map->position.z);
+    glTranslatef(map->position.x, map->position.y, map->position.z);
     draw_model(&(map->model));
+    int i;
+    for(i = 0; i < 11; i++){
+        glTranslatef(0, -1, 0);
+        draw_model(&(map->model));
+    }
+
     glPopMatrix();
 }
